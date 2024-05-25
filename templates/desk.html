@@ -1,0 +1,86 @@
+{%extends "index.html"%}
+{%block title%} Login Page {% endblock%}
+{% block content %}
+<style>
+    .table {
+        margin: auto;
+        width: 700px;
+        border-radius: 5px;
+        border-collapse: collapse;
+        border-top: none;
+    }
+    .header1 {
+        background-color: gray;
+        text-align: center;
+    }
+    .table td, .table th {
+        border-bottom: 1px lightgray solid; 
+        height: 30px;
+        font-size: 14px;
+    }
+    .num {
+        width: 50px;
+    }
+    .title {
+        width: 500px;
+    }
+    .body {
+        text-align: center;
+    }
+    .body .title {
+        text-align: left;
+    }
+    button {
+        width: 100px;
+        height: 40px;
+        font-size: 15px;
+        border: 0;
+
+        border-radius: 5px;
+        padding-left: 10px;
+    }
+    button:active {
+        width: 100px;
+        height: 40px;
+        font-size: 15px;
+        border: 0;
+        border-radius: 5px;
+        padding-left: 10px;
+    }
+</style>
+<table class = table>
+    <tr>
+        <td><button onclick="location.href='write.html'">글쓰기</button></td>
+    </tr>
+</table>
+
+<table class="table">
+    <tr class="header1">
+        <td class="num">No</td>
+        <td class="title">Title</td>
+        <td>Write</td>
+        <td>Date</td>
+    </tr>
+    <script>
+        var i, day = 20;
+        for (i = 10; i > 0; i--) {
+            document.write("<tr class='body'>");
+            document.write("<td>" + i +"</td>");
+            document.write("<td class='title'>제목입니다.</td>"); 
+            document.write("<td>작성자</td>"); 
+            document.write("<td>24-01-" + day-- + "</td>");
+            document.write("</tr>");
+        }
+       </script>
+</table>
+<form class=table>
+<select id="options" name="options">
+    <option value="option1">전체</option>
+    <option value="option2">제목</option>
+    <option value="option3">내용</option>
+  </select>
+<input type="text" />
+<input type="submit" />
+</form>
+<br>
+{%endblock%}
