@@ -48,11 +48,13 @@
         padding-left: 10px;
     }
 </style>
+{% if 'user' in session %}
 <table class = table>
     <tr>
-        <td><button onclick="location.href='write.html'">글쓰기</button></td>
+        <td><button onclick="location.href='{{url_for('write')}}'">글쓰기</button></td>
     </tr>
 </table>
+{% endif %}
 
 <table class="table">
     <tr class="header1">
