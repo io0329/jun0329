@@ -50,7 +50,7 @@
         padding-left: 10px;
     }
 </style>
-<form action="desk.html" method="post">
+<form action="/write" method="post">
 <table> 
 
     <tr><td class="header2">Title</td></tr>
@@ -58,9 +58,10 @@
     <tr><td class="header2">Password</td></tr>
     <tr><td><input type="text" placeholder="Password Input" name="password"></td></tr>
     <tr><td class="header2">Contents</td></tr>
-    <tr><td><textarea placeholder="Contents Input" name="detail"></textarea></td></tr>
+    <tr><td><textarea placeholder="Contents Input" name="content"></textarea></td></tr>
     <tr><td class="header2">File</td></tr>
     <tr><td><input type="file" placeholder="file Input" name="file"></td></tr>
+    <tr><td><input type="checkbox" name="secret"><label>secret post</label></td></tr>
     <tr><td><input type="submit" value="등록" onclick="alert('작성 완료!')"></td></tr>
 </table>
 </form>
