@@ -14,19 +14,26 @@
 
 </style>
         <div>
-            <form action="" class="body" method="post">
+            <form action="/login" class="body" method="post">
                 <h1>Login Page</h1>
                 <hr class=hr>
                 <div>
                     <label for="">ID</label><br>
-                    <input type="text" placeholder="Username" name="ID">
+                    <input type="text" placeholder="Username" name="id">
                 </div>
                 <div>
                     <label for="">Password</label><br>
-                    <input type="text" placeholder="Password" name="PW">
+                    <input type="text" placeholder="Password" name="pw">
                 </div>
                 <hr class=hr1>    
                 <input type="submit" value="Login">
             </form>
         </div>
+{%with messages = get_flashed_messages()%}
+{%if messages %}
+  <script>
+    alert("{{messages[-1]}}");
+  </script>
+  {%endif%}
+{%endwith%}
 {%endblock%}
