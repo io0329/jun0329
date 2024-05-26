@@ -1,41 +1,40 @@
-{%extends "index.html"%}
-{%block title%} Login Page {% endblock%}
+{% extends "index.html" %}
+{% block title %} Login Page {% endblock %}
 {% block content %}
 <style>
     .body {
         text-align: center;
     }
     .hr {
-        width : 30%;}
-
+        width: 30%;
+    }
 </style>
 
-            <form action="/index.html" class = body>
-                <h1>Join Page</h1>
-                <hr class = hr>
-                <div>
-                    <label for="asd">ID</label><br>
-                    <input type="text" id="asd" placeholder="ID Input">
-                </div> 
+<form action="/join" class="body" method="post">
+    <h1>Join Page</h1>
+    <hr class="hr">
+    <div>
+        <label for="asd">ID</label><br>
+        <input type="text" id="asd" placeholder="ID Input" name="id">
+    </div>
 
-                <div>
-                    <label for="">Password</label><br>
-                    <input type="text" placeholder="PW Input">
-                </div> 
-                <div>
-                    <label for="">Password Check</label><br>
-                    <input type="text" placeholder="PW Check Input">
-                </div> 
-                <div>
-                    <label for="">Name</label><br>
-                    <input type="text" placeholder="Name Input">
-                </div> 
-                <div>
-                    <label for="">Email</label><br>
-                    <input type="text" placeholder="Email Input">
-                </div> 
-                <br>
-                <input type="submit" value="Join">
-            </form>
-        </div>
-{%endblock%}
+    <div>
+        <label for="">Password</label><br>
+        <input type="text" placeholder="PW Input" name="pw">
+    </div>
+    <div>
+        <label for="">Password Check</label><br>
+        <input type="text" placeholder="PW Check Input" name="checkpw">
+    </div>
+    <div>
+        <label for="">Name</label><br>
+        <input type="text" placeholder="Name Input" name="name">
+    </div>
+    <div>
+        <label for="">Email</label><br>
+        <input type="text" placeholder="Email Input" name="email">
+    </div>
+    <br>
+    <input type="submit" value="Join">
+</form>
+{% endblock %}
