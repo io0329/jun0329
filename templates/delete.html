@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+{% block title %} Login Page {% endblock %}
+{% block content %}
+<style>
+    .body {
+        text-align: center;
+    } 
+    .hr {
+        width : 30%;
+    }
+    table {
+        margin: auto;
+    }
+    input[type="text"] {
+        border: 1.5px solid;
+        width: 500px;
+        height: 30px;
+        border-radius: 5px;
+        padding-left: 10px;
+    }
+    input[type="submit"] {
+        width: 100px;
+        height: 40px;
+        font-size: 15px;
+        border: 0;
+        outline: 1.5px solid;
+        border-radius: 5px;
+        padding-left: 10px;
+    }
+    input[type="submit"]:active {
+        width: 100px;
+        height: 40px;
+        font-size: 15px;
+        border: 0;
+        border-radius: 5px;
+        outline: 1.5px solid;
+        padding-left: 10px;
+    }
+    .header2 {
+        height: 30px;
+    }
+</style>
+<div class="body">
+    <h1>Delete Page</h1>
+    <hr class="hr">
+</div>
+<form action="/delete" method="post">
+    <input type="hidden" name="idx" value="{{ request.args.get('idx') }}">
+    <table>
+        <tr><td>Password</td></tr>
+        <tr><td><input type="text" placeholder="Password Input" name="password"></td></tr>
+        <tr><td><input type="submit" value="삭제"></td></tr>
+    </table>
+</form>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{ messages[-1] }}");
+        </script>
+    {% endif %}
+{% endwith %}
+{% endblock %}
