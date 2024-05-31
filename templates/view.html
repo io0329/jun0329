@@ -1,0 +1,100 @@
+{% extends "index.html" %}
+{% block title %} 게시판 {% endblock %}
+{% block content %}
+<style>
+    input[type="submit"] {
+        width: 100px;
+        height: 40px;
+        font-size: 15px;
+        border: 0;
+        outline: 1.5px  solid;
+        border-radius: 5px;
+        padding-left: 10px;
+    }
+    input[type="submit"]:active {
+        width: 100px;
+        height: 40px;
+        font-size: 15px;
+        border: 0;
+        border-radius: 5px;
+        outline: 1.5px solid;
+        padding-left: 10px;
+    }
+    table {
+        border: 1px solid #444444;
+        border-collapse: collapse;
+        margin: 20px auto;
+        width: 70%;
+        table-layout: fixed;
+    }
+    td {
+        border: 1px solid #444444;
+        padding: 8px;
+        text-align: left;
+    }
+    .label {
+        width: 20%;
+        font-weight: bold;
+    }
+    .content {
+        width: 80%;
+    }
+    .body {
+        text-align: center;
+    }
+    .hr {
+        width: 30%;
+        margin: 0 auto;
+    }
+    .ul{
+        margin: 20px auto;
+        width: 70%;
+    }
+</style>
+
+<div class="body">
+    <h1>View Page</h1>
+    <hr class="hr">
+    {% for post in posts %}
+    <table>
+        <tr>
+            <td class="label">Title</td>
+            <td class="content">{{ post.title }}</td>
+        </tr>
+        <tr>
+            <td class="label">Writer</td>
+            <td class="content">{{ post.writer }}</td>
+        </tr>
+        <tr>
+            <td class="label">Date</td>
+            <td class="content">{{ post.date }}</td>
+        </tr>
+        <tr>
+            <td class="label">Contents</td>
+            <td class="content">{{ post.content }}</td>
+        </tr>
+    </table>
+    {% endfor %}
+    </div>
+
+
+    {% for post in posts %}
+    {% if 'user' in session and session['user'] == post.id %}
+    <form action="/delete" form="get" class = "ul">
+        <input type="hidden" name = "idx" value = "{{ post.idx }}">
+        <input type="submit" value = "삭제" onclick="location.href='{{ url_for('delete') }}'" >
+    </form>
+
+    <form action="/modify" form="get" class = "ul">
+        <input type="hidden" name = "idx" value = "{{ post.idx }}">
+        <input type="submit" value = "수정"onclick="location.href='{{ url_for('modify') }}'">
+    </form>
+    {% endif %}
+    {% endfor %}
+
+
+
+
+{% endblock %}
+
+
