@@ -1,5 +1,5 @@
-{%extends "index.html"%}
-{%block title%} Login Page {% endblock%}
+{% extends "index.html" %}
+{% block title %} 게시판 {% endblock %}
 {% block content %}
 <style>
     .table {
@@ -35,7 +35,6 @@
         height: 40px;
         font-size: 15px;
         border: 0;
-
         border-radius: 5px;
         padding-left: 10px;
     }
@@ -47,11 +46,12 @@
         border-radius: 5px;
         padding-left: 10px;
     }
+    
 </style>
 {% if 'user' in session %}
-<table class = table>
+<table class="table">
     <tr>
-        <td><button onclick="location.href='{{url_for('write')}}'">글쓰기</button></td>
+        <td><button onclick="location.href='{{ url_for('write') }}'">글쓰기</button></td>
     </tr>
 </table>
 {% endif %}
@@ -63,26 +63,23 @@
         <td>Write</td>
         <td>Date</td>
     </tr>
-    <script>
-        var i, day = 20;
-        for (i = 10; i > 0; i--) {
-            document.write("<tr class='body'>");
-            document.write("<td>" + i +"</td>");
-            document.write("<td class='title'>제목입니다.</td>"); 
-            document.write("<td>작성자</td>"); 
-            document.write("<td>24-01-" + day-- + "</td>");
-            document.write("</tr>");
-        }
-       </script>
+    {% for post in posts %}
+    <tr class="body">
+        <td>{{ loop.index }}</td>
+        <td class="title"><a href="{{ url_for('view', idx=post.idx) }}">{{ post.title }}</a></td>
+        <td>{{ post.writer }}</td>
+        <td>{{ post.date }}</td>
+    </tr>
+    {% endfor %}
 </table>
-<form class=table>
-<select id="options" name="options">
-    <option value="option1">전체</option>
-    <option value="option2">제목</option>
-    <option value="option3">내용</option>
-  </select>
-<input type="text" />
-<input type="submit" />
+<form class="table" method="post">
+    <select name="options">
+        <option value="option1">전체</option>
+        <option value="option2">제목</option>
+        <option value="option3">내용</option>
+    </select>
+    <input type="text" name="query" />
+    <input type="submit" />
 </form>
 <br>
-{%endblock%}
+{% endblock %}
