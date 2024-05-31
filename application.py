@@ -16,9 +16,41 @@ def get_db_connection():
     )
     return connection
 
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def home():
-    return render_template("desk.html")
+    connection = get_db_connection()
+    if request.method == "POST":
+        search_option = request.form.get('options')
+        search_query = request.form.get('query')
+        with connection.cursor() as cursor:
+            if search_option == 'option1':
+                cursor.execute("SELECT * FROM board WHERE title LIKE %s OR content LIKE %s ORDER BY date DESC", ('%' + search_query + '%', '%' + search_query + '%'))
+            elif search_option == 'option2':  # 제목 검색
+                cursor.execute("SELECT * FROM board WHERE title LIKE %s ORDER BY date DESC", ('%' + search_query + '%',))
+            elif search_option == 'option3':  # 내용 검색
+                cursor.execute("SELECT * FROM board WHERE content LIKE %s ORDER BY date DESC", ('%' + search_query + '%',))
+            posts = cursor.fetchall()
+    else:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM board ORDER BY date DESC")
+            posts = cursor.fetchall()
+
+    connection.close()
+    return render_template("desk.html", posts=posts)
+
+        
+
+@app.route("/view/<int:idx>")
+def view(idx):
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM board where idx = %s ORDER BY date DESC", idx)
+        posts = cursor.fetchall()
+        
+    connection.close()
+    return render_template("view.html", posts=posts)
+
+
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
@@ -108,6 +140,54 @@ def write():
 def logout():
     session.pop("user", None) 
     return redirect(url_for("home"))
+
+@app.route("/delete", methods=["GET", "POST"])
+def delete():
+    if request.method=='POST':
+        password=request.form["password"]
+        idx= request.form["idx"]
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT password FROM board WHERE idx=%s", (idx))
+            member = cursor.fetchone()
+            if member:
+                if member["password"] == password:
+                    cursor.execute("DELETE FROM board WHERE idx=%s", (idx))
+                    connection.commit()
+                    connection.close()
+                    return redirect(url_for("home"))
+                else:
+                    flash("비밀번호가 일치하지 않습니다.")
+                    connection.close()
+                    return redirect(url_for("delete", idx=idx))
+            else:
+                flash("게시물을 찾을 수 없습니다.")
+                connection.close()
+                return redirect(url_for("home"))  
+                
+    return render_template("delete.html")
+
+
+@app.route("/modify", methods=["GET", "POST"])
+def modify():
+    if request.method == 'POST':
+        title = request.form["title"]
+        password = request.form["password"]
+        content = request.form["content"]
+        file = request.form["file"]
+        secret = request.form.get("secret", "n") 
+        idx = request.form["idx"]
+
+        if idx:
+            connection = get_db_connection()
+            with connection.cursor() as cursor:
+                sql = "update board set title=%s, password=%s, content=%s, file=%s, secret=%s WHERE idx = %s"
+                cursor.execute(sql, (title, password, content, file, secret,idx))
+                connection.commit()
+            connection.close()
+            return redirect(url_for("home"))
+
+    return render_template("modify.html")
 
 
 
