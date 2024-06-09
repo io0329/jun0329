@@ -32,7 +32,10 @@
         <li><h4><a href="{{url_for('login')}}" style="text-decoration: none;">Login</a></h4></li>
       {% else %}
         <li><h4><a href="{{url_for('logout')}}" style="text-decoration: none;">Logout</a></h4></li>
+        <li><h4><a href="{{url_for('myprofile')}}" style="text-decoration: none;">MyFrofile</a></h4></li>
+        <li><h4><a href="{{url_for('mymodify')}}" style="text-decoration: none;">Information Modify</a></h4></li>
       {% endif %}
+        <li><h4><a href="{{url_for('profile')}}" style="text-decoration: none;">Frofile of users</a></h4></li>
     </ul>
   </nav>
 <hr>
