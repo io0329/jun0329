@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+{% block title %} 아이디 찾기 {% endblock %}
+{% block content %}
+<form action="{{ url_for('find_id') }}" method="POST">
+    <label for="email">이메일:</label>
+    <input type="text" id="email" name="email" required>
+    <input type="submit" value="아이디 찾기">
+</form>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{ messages[-1] }}");
+        </script>
+    {% endif %}
+{% endwith %}
+{% endblock %}
