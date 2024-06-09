@@ -1,0 +1,64 @@
+
+
+{% extends "index.html" %}
+{% block title %} 게시판 {% endblock %}
+{% block content %}
+<style>
+    table {
+        border: 1px solid #444444;
+        border-collapse: collapse;
+        margin: 20px auto;
+        width: 70%;
+        table-layout: fixed;
+    }
+    td {
+        border: 1px solid #444444;
+        padding: 8px;
+        text-align: left;
+    }
+    .label {
+        width: 20%;
+        font-weight: bold;
+    }
+    .content {
+        width: 80%;
+    }
+    .body {
+        text-align: center;
+    }
+    .hr {
+        width: 30%;
+        margin: 0 auto;
+    }
+</style>
+
+<div class="body">
+    <h1>MyFrofile</h1>
+    <hr class="hr">
+    <table>
+        <tr>
+            <td class="label">ID</td>
+            <td class="content">{{ user.id }}</td>
+        </tr>
+        <tr>
+            <td class="label">User</td>
+            <td class="content">{{ user.name }}</td>
+        </tr>
+        <tr>
+            <td class="label">Email</td>
+            <td class="content">{{ user.email }}</td>
+        </tr>
+        <tr>
+            <td class="label">School</td>
+            <td class="content">{{ user.school }}</td>
+        </tr>
+    </table>
+    </div>
+
+
+
+
+{% endblock %}
+
+
+
