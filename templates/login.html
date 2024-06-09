@@ -1,5 +1,5 @@
-{%extends "index.html"%}
-{%block title%} Login Page {% endblock%}
+{% extends "index.html" %}
+{% block title %} Login Page {% endblock %}
 {% block content %}
 <style>
     .body {
@@ -11,30 +11,36 @@
     .hr1 {
         width : 20%;
     }
-
+    .button {
+        margin-top: 10px;
+        text-align: center;
+    }
 </style>
+<div>
+    <form action="/login" class="body" method="post">
+        <h1>Login Page</h1>
+        <hr class=hr>
         <div>
-            <form action="/login" class="body" method="post">
-                <h1>Login Page</h1>
-                <hr class=hr>
-                <div>
-                    <label for="">ID</label><br>
-                    <input type="text" placeholder="Username" name="id">
-                </div>
-                <div>
-                    <label for="">Password</label><br>
-                    <input type="text" placeholder="Password" name="pw">
-                </div>
-                <hr class=hr1>    
-                <input type="submit" value="Login">
-                {%with messages = get_flashed_messages()%}
-                {%if messages %}
-                  <script>
-                    alert("{{messages[-1]}}");
-                  </script>
-                  {%endif%}
-                {%endwith%}
-            </form>
+            <label for="">ID</label><br>
+            <input type="text" placeholder="Username" name="id">
         </div>
-
-{%endblock%}
+        <div>
+            <label for="">Password</label><br>
+            <input type="text" placeholder="Password" name="pw">
+        </div>
+        <hr class=hr1>    
+        <input type="submit" value="Login">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <script>
+            alert("{{messages[-1]}}");
+        </script>
+        {% endif %}
+        {% endwith %}
+    </form>
+    <div class="button">
+        <button onclick="location.href='{{ url_for('find_id') }}'">아이디 찾기</button>
+        <button onclick="location.href='{{ url_for('find_password') }}'">비밀번호 찾기</button>
+    </div>
+</div>
+{% endblock %}
