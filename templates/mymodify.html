@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+{% block title %} 로그인 페이지 {% endblock %}
+{% block content %}
+<style>
+    .body {
+        text-align: center;
+    }
+    .hr {
+        width: 30%;
+    }
+</style>
+
+<form action="/mymodify" class="body" method="post">
+    <h1>Information Modify</h1>
+    <hr class="hr">
+    <div>
+        <label for="">이름</label><br>
+        <input type="text" placeholder="이름 입력" name="name">
+    </div>
+    <div>
+        <label for="">비밀번호</label><br>
+        <input type="text" placeholder="비밀번호 변경원하실 비밀번호 입력" name="pw">
+    </div>
+    <div>
+        <label for="">이메일</label><br>
+        <input type="text" placeholder="이메일 입력" name="email">
+    </div>
+    <div>
+        <label for="">학교</label><br>
+        <input type="text" placeholder="학교 입력" name="school">
+    </div>
+    <br>
+    <input type="submit" value="수정">
+</form>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{ messages[-1] }}");
+        </script>
+    {% endif %}
+{% endwith %}
+{% endblock %}
