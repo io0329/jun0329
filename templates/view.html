@@ -73,6 +73,10 @@
             <td class="label">Contents</td>
             <td class="content">{{ post.content }}</td>
         </tr>
+        {% if post.file %}
+        <td class="label">Files</td>
+        <td class="content"><a href="{{ url_for('uploaded_file', filename=post.file) }}">{{ post.file }}</a></td>
+        {% endif %}
     </table>
     {% endfor %}
     </div>
